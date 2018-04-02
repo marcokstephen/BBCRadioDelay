@@ -130,7 +130,7 @@ http://192.168.0.1:8000/radio1/3-5
 http://192.168.0.1:8000/radio2/4
 http://192.168.0.1:8000/radio4fm/5
 http://192.168.0.1:8000/radio5live/6
-http://192.168.0.1:8000/radio5music/7
+http://192.168.0.1:8000/radio6music/7
 ```
 
 ### Setting up the cron jobs
@@ -145,6 +145,12 @@ The following will make `kill-ffmpeg` and `purge-ogg` run every day at 05:00, an
 0 5 * * * /root/BBCRadioDelay/cron-scripts/kill-ffmpeg
 0 5 * * * /root/BBCRadioDelay/cron-scripts/purge-ogg
 0 5 * * sun /root/BBCRadioDelay/cron-scripts/resync
+```
+
+### Debugging
+If the streams do not start, try checking the ices log to see if there are any attempts reported.
+```
+cat /var/log/ices/ices.log
 ```
 
 # Questions?
