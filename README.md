@@ -74,4 +74,66 @@ mkdir /var/log/ices
 You are done, that was easy.
 
 ## Using this Project
-~~ In progress ~~
+
+### Configuring the scripts
+First, clone this repository.
+```
+git clone https://github.com/marcokstephen/BBCRadioDelay.git
+cd BBCRadioDelay
+```
+Take note of what your full directory path is. You will need to modify the scripts to use this directory path. To get your current directory, run
+```
+pwd
+```
+For example, it might show your current directory is `/root/BBCRadioDelay`. Copy this, and modify the following six files to set the `BASE_DIRECTORY` variable:
+* `cron-scripts/kill-ffmpeg`
+* `cron-scripts/purge-ogg`
+* `cron-scripts/resync`
+* `run-scripts/downloader.sh`
+* `run-scripts/restart-service.sh`
+* `run-scripts/start_radio.sh`
+```
+BASE_DIRECTORY=/root/BBCRadioDelay
+```
+(make sure to set the variable according to what YOUR base directory is!)
+
+Next, you will need to open `run-scripts/start_radio.sh`.
+```
+vi run-scripts/start_radio.sh
+```
+Find the `SERVER_PASSWORD` and set it to what you made the `source-password` when configuring icecast2.
+```
+SERVER_ADDRESS="localhost"
+SERVER_PORT="8000"
+SERVER_PASSWORD="abc"
+```
+
+### Starting the streams
+
+You are now ready to start the streams. To do this, we use the `start_radio.sh` script.
+```
+run-scripts/start_radio.sh {stream name} {stream code} {stream genre}
+```
+Examples:
+```
+run-scripts/start_radio.sh "BBC Radio 1" radio1 "Pop"
+run-scripts/start_radio.sh "BBC Radio 2" radio2 "Adult Contemporary"
+run-scritps/start_radio.sh "BBC Radio 4" radio4fm "Talk"
+run-scritps/start_radio.sh "BBC Radio 5" radio5live "Talk"
+run-scripts/start_radio.sh "BBC Radio 6" radio6music "Music"
+```
+You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. The radio stream itself won't have started yet, because it is going to delay at least 3.5 hours (that is the time difference to the first time zone -- Newfoundland). For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start earlier.
+
+### Setting up the cron jobs
+
+The stream should be working properly at this point but there is still some maintenance to do. There are three cron scripts that need to run. `kill-ffmpeg` and `purge-ogg` should run daily. `resync` should run once a week. You can open the files themselves to see a description of what it is that they do. To make these run, add them to your `crontab`.
+
+```
+crontab -e
+```
+The following will make `kill-ffmpeg` and `purge-ogg` run every day at 05:00, and `resync` will run every Sunday at 05:00. Again, make sure to replace the path to the files with whatever your file path is.
+```
+0 5 * * * /root/BBCRadioDelay/cron-scripts/kill-ffmpeg
+0 5 * * * /root/BBCRadioDelay/cron-scripts/purge-ogg
+0 5 * * sun /root/BBCRadioDelay/cron-scripts/resync
+```
