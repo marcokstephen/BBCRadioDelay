@@ -146,3 +146,6 @@ The following will make `kill-ffmpeg` and `purge-ogg` run every day at 05:00, an
 0 5 * * * /root/BBCRadioDelay/cron-scripts/purge-ogg
 0 5 * * sun /root/BBCRadioDelay/cron-scripts/resync
 ```
+
+# Questions?
+You can open an issue on this repository or send an email to marcok<dot>stephen<at>gmail<dot>com
