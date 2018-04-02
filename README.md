@@ -118,8 +118,8 @@ Examples:
 ```
 run-scripts/start_radio.sh "BBC Radio 1" radio1 "Pop"
 run-scripts/start_radio.sh "BBC Radio 2" radio2 "Adult Contemporary"
-run-scritps/start_radio.sh "BBC Radio 4" radio4fm "Talk"
-run-scritps/start_radio.sh "BBC Radio 5" radio5live "Talk"
+run-scripts/start_radio.sh "BBC Radio 4" radio4fm "Talk"
+run-scripts/start_radio.sh "BBC Radio 5" radio5live "Talk"
 run-scripts/start_radio.sh "BBC Radio 6" radio6music "Music"
 ```
 You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. The radio stream itself won't have started yet, because it is going to delay at least 3.5 hours (that is the time difference to the first time zone -- Newfoundland). For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start earlier.
