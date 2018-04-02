@@ -124,6 +124,15 @@ run-scripts/start_radio.sh "BBC Radio 6" radio6music "Music"
 ```
 You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. The radio stream itself won't have started yet, because it is going to delay at least 3.5 hours (that is the time difference to the first time zone -- Newfoundland). For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start earlier.
 
+Once the streams start, you can view them at http://192.168.0.1:8000, (remembering to use your own IP address) and you can listen by appending your mount point name. Examples:
+```
+http://192.168.0.1:8000/radio1/3-5
+http://192.168.0.1:8000/radio2/4
+http://192.168.0.1:8000/radio4fm/5
+http://192.168.0.1:8000/radio5live/6
+http://192.168.0.1:8000/radio5music/7
+```
+
 ### Setting up the cron jobs
 
 The stream should be working properly at this point but there is still some maintenance to do. There are three cron scripts that need to run. `kill-ffmpeg` and `purge-ogg` should run daily. `resync` should run once a week. You can open the files themselves to see a description of what it is that they do. To make these run, add them to your `crontab`.
