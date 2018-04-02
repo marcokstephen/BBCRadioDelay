@@ -148,4 +148,4 @@ The following will make `kill-ffmpeg` and `purge-ogg` run every day at 05:00, an
 ```
 
 # Questions?
-You can open an issue on this repository or send an email to marcok<dot>stephen<at>gmail<dot>com
+You can open an issue on this repository or send an email to marcok dot stephen at gmail dot com
