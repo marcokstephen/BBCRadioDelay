@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# This script kills ffmpeg if it happens to be running for a period longer than two days
+# ffmpeg should automatically restart if you initiated the streams using the "start_radio.sh"
+# script.
+
+# The reason that we kill ffmpeg is so that the ogg files never become too large
+# By restarting ffmpeg, we cause a new ogg file to be created.
+
+BASE_FOLDER=
+
+purgelog="$BASE_FOLDER/logs/purgelog.txt"
+
+# 2 days is the age limit = 60*60*24*2 = 172800
+agelimit=172800
+
+ffmpegpid=$(pidof ffmpeg)
+
+echo "`date` Running kill-ffmpeg: Checking $ffmpegpid" >> $purgelog
+
+# For each instance of ffmpeg, check to see the lifetime of the process in seconds.
+# If the lifetime is greater than the age limit, kill the process.
+ 
+for p in $ffmpegpid
+do
+  lifetime=$(ps -p $p -o etimes=)
+  echo "$p has lifetime $lifetime" >> $purgelog
+  if [ "$lifetime" -gt "$agelimit" ]; then
+	echo "WARNING: Killing $p which had lifetime $lifetime (greater than limit of $agelimit)" >> $purgelog
+	kill -9 $p
+  fi
+done
+
+echo "Done running kill-ffmpeg" >> $purgelog
+echo "---" >> $purgelog

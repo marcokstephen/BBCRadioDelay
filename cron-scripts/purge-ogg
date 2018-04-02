@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This script purges the ogg files that are older than one day. This prevents
+# the server from running out of diskspace.
+
+# The script uses the ogg files' last-written-to time to determine if the file is
+# older than one day.
+
+BASE_FOLDER=
+
+logfile="$BASE_FOLDER/logs/purgelog.txt"
+
+echo "`date` Purging the following files:" >> $logfile
+
+# Print to the logfile what will be removed (does not actually remove the files)
+find "$BASE_FOLDER/audio" -type f -name '*.ogg' -mtime +1 >> $logfile
+
+# Actually remove the files.
+find "$BASE_FOLDER/audio" -type f -name '*.ogg' -mtime +1 -exec rm {} \;
+
+echo "Purge completed with code $?" >> $logfile
+echo "---" >> $logfile

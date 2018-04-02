@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# This is a script intended to be run weekly or bi-weekly, to restart the streams.
+# It kills the stream and then reinitates it. The benefit of this is that the
+# streams tend to get un-synchronized over time (in my experience, about 2 minutes per week)
+# and by restarting them at least once a week we get everything back on track.
+
+# NOTE: This script might require a bit of manual editing. ie, right now it is hard-coded for
+# "radio2" and "radio4fm"
+
+# Also note, the order of the killings is important. First, we kill the downloader. The downloader
+# is responsible for restarting ffmpeg every time ffmpeg dies, so obviously we need to kill the
+# downloader before killing ffmpeg.
+
+BASE_FOLDER=
+
+# ============================================================
+# Restart radio2
+
+ps axf | grep downloader | grep radio2 | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio2 | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio2 | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio2 | awk '{print "kill -9 " $1}' | sh
+
+rm $BASE_FOLDER/audio/*radio2*
+
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 2" radio2 "Adult Contemporary"
+
+# ============================================================
+# Restart radio4fm
+
+# restart radio4fm
+
+ps axf | grep downloader | grep radio4fm | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio4fm | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio4fm | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio4fm | awk '{print "kill -9 " $1}' | sh
+
+rm $BASE_FOLDER/audio/*radio4fm*
+
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 4" radio4fm Talk
