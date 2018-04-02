@@ -16,7 +16,7 @@
 
 BASE_FOLDER=
 
-filenames="$BASE_FOLDER/$1_*.ogg"
+filenames="$BASE_FOLDER/audio/$1_*.ogg"
 
 log="$BASE_FOLDER/logs/$1-downloader-log.txt"
 playlist="$BASE_FOLDER/logs/$1-autogen-playlist.txt"
