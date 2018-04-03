@@ -66,6 +66,16 @@ Now you can start `icecast2` and when you open your server in a web browser at p
 ```
 Example: http://192.168.0.1:8000 (but make sure to replace 192.168.0.1 with your server's external IP address). You should see the icecast2 page.
 
+#### Debugging
+If you don't see anything, as a debugging step you can try restarting the icecast service.
+```
+/etc/init.d/icecast2 restart
+```
+You can also use the following tool to check for ports that are listening for connections. 8000 should appear if icecast is listening.
+```
+netstat -l
+```
+
 ### Configuring ices2
 You need to make a folder to hold the logs.
 ```
@@ -120,7 +130,7 @@ run-scripts/start_radio.sh "BBC Radio 1" radio1 "Pop"
 run-scripts/start_radio.sh "BBC Radio 2" radio2 "Adult Contemporary"
 run-scripts/start_radio.sh "BBC Radio 4" radio4fm "Talk"
 run-scripts/start_radio.sh "BBC Radio 5" radio5live "Talk"
-run-scripts/start_radio.sh "BBC Radio 6" radio6music "Music"
+run-scripts/start_radio.sh "BBC Radio 6" 6music "Music"
 ```
 You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. The radio stream itself won't have started yet, because it is going to delay at least 3.5 hours (that is the time difference to the first time zone -- Newfoundland). For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start earlier.
 
@@ -130,7 +140,7 @@ http://192.168.0.1:8000/radio1/3-5
 http://192.168.0.1:8000/radio2/4
 http://192.168.0.1:8000/radio4fm/5
 http://192.168.0.1:8000/radio5live/6
-http://192.168.0.1:8000/radio6music/7
+http://192.168.0.1:8000/6music/7
 ```
 
 ### Setting up the cron jobs
