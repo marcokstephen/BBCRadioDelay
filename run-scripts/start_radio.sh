@@ -92,7 +92,7 @@ generate_xml () {
     echo "                control how often it tries to reconnect, and how many times" >> $filename
     echo "                it tries to reconnect. Delay is in seconds." >> $filename
     echo "                If you set reconnectattempts to -1, it will continue " >> $filename
-    echo "                indefinately. Suggest setting reconnectdelay to a large value" >> $filename
+    echo "                indefinitely. Suggest setting reconnectdelay to a large value" >> $filename
     echo "                if you do this." >> $filename
     echo "            -->" >> $filename
     echo "            <reconnectdelay>2</reconnectdelay>" >> $filename
