@@ -121,7 +121,9 @@ SERVER_PASSWORD="abc"
 ### Starting the streams
 
 You are now ready to start the streams. To do this, we use can use the `resync` script in `cron-scripts` to start all stations at once:
-`./cron-scripts/resync`
+```
+./cron-scripts/resync
+```
 You can verify that things started properly by going to the `audio` folder and seeing that a file is downloading. The download log should also be saved to the `logs` folder. The radio stream itself won't have started yet, because it is going to delay at least 3.5 hours (that is the time difference to the first time zone -- Newfoundland). For debugging purposes, you can play around with different delays in `start_radio.sh` to make the streams start earlier.
 
 Once the streams start, you can view them at http://192.168.0.1:8000, (remembering to use your own IP address) and you can listen by appending your mount point name. Examples:
