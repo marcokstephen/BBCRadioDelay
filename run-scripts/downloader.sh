@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Example usage: "./downloader.sh radio2 &"
+# Example usage: "./downloader.sh radio_two &"
 
 # This script initiates initiates the download of the audio stream from the BBC servers.
 # It does basic error handling, if the stream returns a 404 error or ffmpeg fails,
@@ -10,12 +10,12 @@ BASE_FOLDER=
 
 if [ "$#" -ne 1 ]; then
     echo "Illegal number of parameters"
-    echo "Example usage: ./downloader.sh radio2"
+    echo "Example usage: ./downloader.sh radio_two"
     exit
 fi
 
-BBC_STREAM=http://bbcmedia.ic.llnwd.net/stream/bbcmedia_$1_mf_p
-
+BBC_STREAM=http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/llnw/bbc_$1.m3u8 # Limelight Networks CDN
+#BBC_STREAM=http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_$1.m3u8 # Akamai CDN
 log="$BASE_FOLDER/logs/$1-downloader-log.txt"
 playlist="$BASE_FOLDER/logs/$1-autogen-playlist.txt"
 
