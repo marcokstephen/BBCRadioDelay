@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # usage: ./start_radio.sh {stream name} {variable stream name} {genre}
-# Example usage: ./start_radio.sh "BBC Radio 1" "radio1" "Pop"
+# Example usage: ./start_radio.sh "BBC Radio 1" radio_one "Pop"
 
 BASE_FOLDER=
 
@@ -126,7 +126,7 @@ generate_xml () {
 # Calling this will make ices2 initiate after sleeping for a specified delay. This sleeping delay is what
 # gives the impression of the time-zone delays.
 startstream () {
-    # $1: stream variable name (ie. 'radio2')
+    # $1: stream variable name (ie. 'radio_two')
     # $2: hours of delay
 
     delay=$2
@@ -138,7 +138,7 @@ startstream () {
 }
 
 startnewfiestream () {
-    #usage: $1: stream variable name (ie. 'radio2')
+    #usage: $1: stream variable name (ie. 'radio_two')
 
     # 3.5 * 60 * 60
     delay=12600
@@ -149,7 +149,7 @@ startnewfiestream () {
 
 echo "Starting $1 delayed stream" >> $logfile
 
-# Generate the xml files that will be read by ices2
+# Generate the xml files that will be read by ices2.
 generate_xml "$1" $2 "$3" "3-5" #newfoundland
 generate_xml "$1" $2 "$3" 4 #atlantic
 generate_xml "$1" $2 "$3" 5 #eastern
@@ -170,3 +170,4 @@ startstream $2 8 #pacific
 
 echo "Finished initiation of $1" >> $logfile
 
+# To save on CPU usage, you can omit specific timezones. Comment out the associated generate_xml and the startstream above.
