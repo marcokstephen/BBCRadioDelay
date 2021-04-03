@@ -5,8 +5,7 @@
 # streams tend to get un-synchronized over time (in my experience, about 2 minutes per week)
 # and by restarting them at least once a week we get everything back on track.
 
-# NOTE: This script might require a bit of manual editing. ie, right now it is hard-coded for
-# "radio2" and "radio4fm"
+# NOTE: To reduce disk usage and CPU use you can comment out the start_radio.sh lines for the stations you don't intend on using.
 
 # Also note, the order of the killings is important. First, we kill the downloader. The downloader
 # is responsible for restarting ffmpeg every time ffmpeg dies, so obviously we need to kill the
@@ -15,27 +14,73 @@
 BASE_FOLDER=
 
 # ============================================================
-# Restart radio2
+# Restart radio_one
 
-ps axf | grep downloader | grep radio2 | awk '{print "kill -9 " $1}' | sh
-ps axf | grep restart-service | grep radio2 | awk '{print "kill -9 " $1}' | sh
-ps axf | grep ffmpeg | grep radio2 | awk '{print "kill -9 " $1}' | sh
-ps axf | grep ices2 | grep radio2 | awk '{print "kill -9 " $1}' | sh
+ps axf | grep downloader | grep radio_one | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio_one | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio_one | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio_one | awk '{print "kill -9 " $1}' | sh
 
-rm $BASE_FOLDER/audio/*radio2*
+rm $BASE_FOLDER/audio/*radio_one*
 
-$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 2" radio2 "Adult Contemporary"
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 1" radio_one "Pop, Dance, R&B, Rock"
 
 # ============================================================
-# Restart radio4fm
+# Restart radio_two
 
-# restart radio4fm
+ps axf | grep downloader | grep radio_two | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio_two | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio_two | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio_two | awk '{print "kill -9 " $1}' | sh
 
-ps axf | grep downloader | grep radio4fm | awk '{print "kill -9 " $1}' | sh
-ps axf | grep restart-service | grep radio4fm | awk '{print "kill -9 " $1}' | sh
-ps axf | grep ffmpeg | grep radio4fm | awk '{print "kill -9 " $1}' | sh
-ps axf | grep ices2 | grep radio4fm | awk '{print "kill -9 " $1}' | sh
+rm $BASE_FOLDER/audio/*radio_two*
 
-rm $BASE_FOLDER/audio/*radio4fm*
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 2" radio_two "Easy Listening, Varied Output"
 
-$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 4" radio4fm Talk
+# ============================================================
+# Restart radio_three
+
+ps axf | grep downloader | grep radio_three | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio_three | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio_three | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio_three | awk '{print "kill -9 " $1}' | sh
+
+rm $BASE_FOLDER/audio/*radio_three*
+
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 3" radio_three "Classical, Opera, Arts"
+
+# ============================================================
+# Restart radio_fourfm
+
+ps axf | grep downloader | grep radio_fourfm | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio_fourfm | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio_fourfm | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio_fourfm | awk '{print "kill -9 " $1}' | sh
+
+rm $BASE_FOLDER/audio/*radio_fourfm*
+
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 4" radio_fourfm "Speech, Plays, Varied Output"
+
+# ============================================================
+# Restart radio_five_live
+
+ps axf | grep downloader | grep radio_five_live | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep radio_five_live | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep radio_five_live | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep radio_five_live | awk '{print "kill -9 " $1}' | sh
+
+rm $BASE_FOLDER/audio/*radio_five_live*
+
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 5" radio_five_live "News, Sport"
+
+# ============================================================
+# Restart 6music
+
+ps axf | grep downloader | grep 6music | awk '{print "kill -9 " $1}' | sh
+ps axf | grep restart-service | grep 6music | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ffmpeg | grep 6music | awk '{print "kill -9 " $1}' | sh
+ps axf | grep ices2 | grep 6music | awk '{print "kill -9 " $1}' | sh
+
+rm $BASE_FOLDER/audio/*6music*
+
+$BASE_FOLDER/run-scripts/start_radio.sh "BBC Radio 6" 6music "Alternative"
